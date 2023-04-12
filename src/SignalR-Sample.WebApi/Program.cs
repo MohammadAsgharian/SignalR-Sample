@@ -1,3 +1,4 @@
+using SignalR_Sample.WebApi;
 using SignalR_Sample.WebApi.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDatabaseSetup(builder.Configuration);
 builder.Services.AddJWT(builder.Configuration);
+builder.Services.RegisterServices(builder.Configuration);
 
 
 

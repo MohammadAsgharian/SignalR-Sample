@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SignalR_Sample.WebApi.Domain;
 
-namespace SignalR_Sample.WebApi.Infrastructure.Configurations.Messages
+namespace SignalR_Sample.WebApi.Infrastructure.Configurations
 {
     internal sealed class MessageConfiguration : IEntityTypeConfiguration<Message>
     {

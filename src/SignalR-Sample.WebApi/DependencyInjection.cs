@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using SignalR_Sample.WebApi.Application;
+using SignalR_Sample.WebApi.Application.People;
 using SignalR_Sample.WebApi.Configurations;
+using SignalR_Sample.WebApi.Domain;
+using SignalR_Sample.WebApi.Infrastructure.Repositories;
 using System.Reflection;
 
 namespace SignalR_Sample.WebApi
@@ -24,12 +27,14 @@ namespace SignalR_Sample.WebApi
             services.AddSingleton<JwtSettings>(
                 new JwtSettings(
                     configuration.GetOptions<JwtSettings>(ConstData.JwtSettings).JWTLifespan,
-                    configuration.GetOptions<JwtSettings>(ConstData.JwtSettings).JWTSecretKey,
-                    configuration.GetOptions<JwtSettings>(ConstData.JwtSettings).RefreshTokenTimeout)
+                    configuration.GetOptions<JwtSettings>(ConstData.JwtSettings).JWTSecretKey)
                 );
 
-            services.AddMediatR(typeof(DependencyInjection).GetTypeInfo().Assembly);
-           
+            services.AddMediatR(typeof(GetTokenQuery).GetTypeInfo().Assembly);
+
+            services.AddScoped<IPerson, PersonRepository>();
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
             return services;
         }
     }
