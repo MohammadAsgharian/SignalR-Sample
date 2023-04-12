@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SignalR_Sample.WebApi.Domain;
 
-namespace SignalR_Sample.WebApi.Infrastructure.Configurations.People
+namespace SignalR_Sample.WebApi.Infrastructure.Configurations
 {
   
     internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
