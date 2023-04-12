@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2DF7E03C-CFF6-4FFA-BE90-11486B270129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR-Sample.WebApi", "src\SignalR-Sample.WebApi\SignalR-Sample.WebApi.csproj", "{05516275-E2E2-470E-9519-7388F1BE714D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05516275-E2E2-470E-9519-7388F1BE714D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05516275-E2E2-470E-9519-7388F1BE714D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05516275-E2E2-470E-9519-7388F1BE714D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05516275-E2E2-470E-9519-7388F1BE714D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{05516275-E2E2-470E-9519-7388F1BE714D} = {2DF7E03C-CFF6-4FFA-BE90-11486B270129}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C3F9B15-B7DF-4ADC-8CE0-A4CBFB75B56C}
+	EndGlobalSection
+EndGlobal
