@@ -1,9 +1,12 @@
 import axios from "axios";
-const API_URL = process.env.REACT_APP_BASE_API_URL;
-const api = setupInterceptorsTo(
+import { LocalStorage } from "./local-storage";
+
+const API_URL = "https://localhost:44379";
+const token = LocalStorage.loadState("token");
+const api = 
   axios.create({
     baseURL: API_URL,
-  })
-);
+    headers: {'Authorization': `Bearer ${token}`}
+  });
 
 export default api;

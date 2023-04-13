@@ -12,7 +12,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDatabaseSetup(builder.Configuration);
 builder.Services.AddJWT(builder.Configuration);
 builder.Services.RegisterServices(builder.Configuration);
-
+builder.Services.AddCors(options => {
+    options.AddPolicy(
+  name: "OpenCORSPolicy",
+  builder => {
+      builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+  });
+});
 
 
 var app = builder.Build();
@@ -25,7 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("OpenCORSPolicy");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

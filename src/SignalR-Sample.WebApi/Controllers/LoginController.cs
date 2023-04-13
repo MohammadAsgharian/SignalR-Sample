@@ -17,12 +17,13 @@ namespace SignalR_Sample.WebApi.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Get(string userName)
+        [HttpGet()]
+        public async Task<IActionResult> Get(string username)
         {
             try
             {
                 var request =
-                    new GetTokenQuery(userName);
+                    new GetTokenQuery(username);
                 var result = await _mediator.Send(request);
 
                 return Ok(result);
