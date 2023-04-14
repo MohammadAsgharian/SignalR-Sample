@@ -7,8 +7,7 @@
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Id of new message</returns>
-        Task<int> CreateMessage(
+        Task<int> CreateMessageAsync(
             Message request,
             CancellationToken cancellationToken = default);
     }

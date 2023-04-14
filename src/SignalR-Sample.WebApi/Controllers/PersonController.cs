@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SignalR_Sample.WebApi.Application.Login;
-using SignalR_Sample.WebApi.Application.People;
 using SignalR_Sample.WebApi.Application.Queries;
 
 namespace SignalR_Sample.WebApi.Controllers

@@ -23,5 +23,7 @@ namespace SignalR_Sample.WebApi.Domain
         Task<List<Person>> GetAll(
             CancellationToken cancellationToken = default);
 
+       
+
     }
 }

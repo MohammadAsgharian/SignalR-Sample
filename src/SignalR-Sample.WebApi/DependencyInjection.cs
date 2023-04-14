@@ -33,6 +33,7 @@ namespace SignalR_Sample.WebApi
             services.AddMediatR(typeof(GetTokenQuery).GetTypeInfo().Assembly);
 
             services.AddScoped<IPerson, PersonRepository>();
+            services.AddScoped<IMessage, MessageRepository>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
             return services;

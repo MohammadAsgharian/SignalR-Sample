@@ -9,6 +9,7 @@ import {
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { PersonRepository } from '../../person/person-repository';
+import { MessageRepository } from '../message-repository';
 
 
 const SendMessage = () => {
@@ -36,9 +37,14 @@ const SendMessage = () => {
     setSelectedPerson(event.target.value);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     console.log(`Sending message "${message}" to ${selectedPerson}`);
     // Send the message to the selected person here
+    try {
+      const result =await  MessageRepository.createMessage(selectedPerson,message);
+    } catch (error) {
+      console.error("Login error: ", error);
+    }
   };
 
   const handleQuillChange = (value) => {
@@ -56,7 +62,7 @@ const SendMessage = () => {
               onChange={handlePersonChange}
             > 
               {persons.map(person => (
-              <MenuItem key={person.id} value={person.name}>
+              <MenuItem key={person.id} value={person.id}>
                 {person.name}
               </MenuItem>
             ))}

@@ -3,22 +3,27 @@ using SignalR_Sample.WebApi.Domain;
 
 namespace SignalR_Sample.WebApi.Application.Commands
 {
-    public record CreateMessageCommand(long PersonId, string MessageContent) : IRequest<int>;
+    public record CreateMessageCommand(long PersonId, string Body) : IRequest<int>;
 
     public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand, int>
     {
-        private readonly IPerson personRepository;
+        private readonly IMessage messageRepository;
 
-        public GetPersonHandler(
-            IPerson _personRepository)
+        public CreateMessageCommandHandler(
+            IMessage _messageRepository)
         {
-            personRepository = _personRepository;
+            messageRepository = _messageRepository;
         }
 
         public async Task<int> Handle(CreateMessageCommand request, CancellationToken cancellationToken)
         {
-
-            return result;
+            var message =
+                new Message()
+                {
+                    Body = request.Body,
+                    PersonId = request.PersonId
+                };
+            return await messageRepository.CreateMessageAsync(message);
         }
     }
 
