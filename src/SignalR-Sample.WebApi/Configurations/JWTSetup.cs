@@ -25,6 +25,19 @@ namespace SignalR_Sample.WebApi.Configurations
             })
             .AddJwtBearer(x =>
             {
+                x.Events = new JwtBearerEvents()
+                {
+                    OnMessageReceived = async context =>
+                    {
+                        var accessToken =  context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/messageHub"))) 
+                        {
+                            context.Token = accessToken;
+                        }
+                    }
+                };
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters

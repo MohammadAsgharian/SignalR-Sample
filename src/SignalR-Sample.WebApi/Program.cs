@@ -1,5 +1,6 @@
 using SignalR_Sample.WebApi;
 using SignalR_Sample.WebApi.Configurations;
+using SignalR_Sample.WebApi.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +13,19 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDatabaseSetup(builder.Configuration);
 builder.Services.AddJWT(builder.Configuration);
 builder.Services.RegisterServices(builder.Configuration);
+
 builder.Services.AddCors(options => {
     options.AddPolicy(
   name: "OpenCORSPolicy",
   builder => {
-      builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+      builder.WithOrigins("http://localhost:3000")
+      .AllowAnyHeader()
+      .AllowAnyMethod()
+      .AllowCredentials();
   });
 });
+;
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
@@ -30,11 +37,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("OpenCORSPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
 
-app.MapControllers();
-
+    endpoints.MapControllers();
+    endpoints.MapHub<MessageHub>("/messageHub");
+});
 app.Run();

@@ -7,18 +7,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { LoginRepository } from './login-repository';
 import { LocalStorage } from '../../utils/local-storage';
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export default function Login() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     
     var result = await new LoginRepository().list(data.get('username').toString());
-    console.log(result);
     LocalStorage.saveState("Token", result.token);
+    navigate("/inbox");
   };
 
   return (
