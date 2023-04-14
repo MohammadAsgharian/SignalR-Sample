@@ -2,8 +2,13 @@
 using SignalR_Sample.WebApi.Configurations;
 using SignalR_Sample.WebApi.Domain;
 
-namespace SignalR_Sample.WebApi.Application.People
+namespace SignalR_Sample.WebApi.Application.Queries
 {
+    public record GetTokenResponse(
+       long PersonId,
+       string UserName,
+       string Token);
+
     public record GetTokenQuery(string userName) : IRequest<GetTokenResponse>;
 
     public class GetTokenHandler : IRequestHandler<GetTokenQuery, GetTokenResponse>
@@ -18,7 +23,7 @@ namespace SignalR_Sample.WebApi.Application.People
             IJwtTokenGenerator _jwtTokenGenerator,
             IPerson _personRepository)
         {
-           jwtTokenGenerator = _jwtTokenGenerator;
+            jwtTokenGenerator = _jwtTokenGenerator;
             personRepository = _personRepository;
             jwtSettings = _jwtSettings;
         }
@@ -28,7 +33,7 @@ namespace SignalR_Sample.WebApi.Application.People
             var result =
                    await personRepository.GetByUserName(request.userName, cancellationToken);
             string token =
-                  jwtTokenGenerator.GenerateToken(result.Id,result.UserName);
+                  jwtTokenGenerator.GenerateToken(result.Id, result.UserName);
 
             return new GetTokenResponse(
                 PersonId: result.Id,

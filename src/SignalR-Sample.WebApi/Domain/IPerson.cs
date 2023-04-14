@@ -15,5 +15,13 @@ namespace SignalR_Sample.WebApi.Domain
             string UserName, 
             CancellationToken cancellationToken = default);
 
-       }
+        /// <summary>
+        /// Get All People
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Person</returns>
+        Task<List<Person>> GetAll(
+            CancellationToken cancellationToken = default);
+
+    }
 }

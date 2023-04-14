@@ -8,27 +8,28 @@ namespace SignalR_Sample.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class PersonController : ControllerBase
     {
         public readonly IMediator _mediator;
 
-        public LoginController(IMediator mediator)
+        public PersonController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Get(string username)
+        public async Task<IActionResult> Get()
         {
             try
             {
                 var request =
-                    new GetTokenQuery(username);
+                    new GetPersonQuery();
                 var result = await _mediator.Send(request);
 
                 return Ok(result);
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 return BadRequest(ex.Message);
             }
 

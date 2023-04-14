@@ -3,7 +3,7 @@ import { GenerateUrl } from "./generator-url";
 
 const responseBody = (response) => response.data;
 
-export const HttClient = {
+export const HttpClient = {
   get: async (url , parameter) => {
     if (Object.keys(parameter).length !== 0) {
       if (parameter) {

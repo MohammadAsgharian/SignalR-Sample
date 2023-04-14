@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SignalR_Sample.WebApi.Application;
-using SignalR_Sample.WebApi.Application.People;
+using SignalR_Sample.WebApi.Application.Queries;
 using SignalR_Sample.WebApi.Configurations;
 using SignalR_Sample.WebApi.Domain;
 using SignalR_Sample.WebApi.Infrastructure.Repositories;

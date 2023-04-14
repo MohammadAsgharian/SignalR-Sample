@@ -19,7 +19,8 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const result = await new LoginRepository().list(username);
+      const result =await  LoginRepository.getUserByUsername(username);
+      console.log(result);
       LocalStorage.saveState("Token", result.token);
       navigate("/inbox");
     } catch (error) {

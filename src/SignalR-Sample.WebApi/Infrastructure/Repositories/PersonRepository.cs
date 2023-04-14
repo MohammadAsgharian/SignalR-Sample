@@ -14,6 +14,9 @@ namespace SignalR_Sample.WebApi.Infrastructure.Repositories
             Context = _Context ?? throw new ArgumentNullException(nameof(_Context));
         }
 
+        public async Task<List<Person>> GetAll(CancellationToken cancellationToken = default)
+            => await Context.People.ToListAsync(cancellationToken);
+
         public async Task<Person?> GetByUserName(
             string UserName,
             CancellationToken cancellationToken = default)
