@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using SignalR_Sample.WebApi.Application.Interfaces;
 using SignalR_Sample.WebApi.Domain;
 using SignalR_Sample.WebApi.Infrastructure.Repositories;
 using System.Collections.Concurrent;
@@ -8,16 +9,20 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace SignalR_Sample.WebApi.Hubs
 {
     [Authorize]
-    public class MessageHub : Hub<MessageHub>
+    public class MessageHub : Hub<IMessageMethods>, IMessageHub
     {
         private static readonly ConnectionMapping<long> users
             = new ConnectionMapping<long>();
 
         private readonly IPerson personRepository;
+        private readonly IHubContext<MessageHub, IMessageMethods> hubContext;
 
-        public MessageHub(IPerson _personRepository)
+        public MessageHub(
+            IPerson _personRepository,
+            IHubContext<MessageHub, IMessageMethods> _hubContext)
         {
             personRepository = _personRepository;
+            hubContext = _hubContext;   
         }
 
        
@@ -32,10 +37,7 @@ namespace SignalR_Sample.WebApi.Hubs
             await base.OnConnectedAsync();
         }
 
-        public async Task SendMessage(long PersonId, Message message)
-        {
-
-        }
+      
 
 
         public override async Task OnDisconnectedAsync(Exception ex)
@@ -49,5 +51,24 @@ namespace SignalR_Sample.WebApi.Hubs
             await base.OnDisconnectedAsync(ex);
         }
 
+        public Task SendMessageToUser(long personId, string message)
+        {
+            IEnumerable<string> _connections =
+                users.GetConnections(personId);
+            hubContext.Clients.Clients(_connections).MessageToUser(message);
+
+            return Task.CompletedTask;
+
+        }
+
+        public Task SendMessageToUsers(IEnumerable<long> personIds, string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendMessageToAllUsers(string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

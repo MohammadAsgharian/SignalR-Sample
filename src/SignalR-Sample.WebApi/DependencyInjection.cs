@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using SignalR_Sample.WebApi.Application;
+using SignalR_Sample.WebApi.Application.Interfaces;
 using SignalR_Sample.WebApi.Application.Queries;
 using SignalR_Sample.WebApi.Configurations;
 using SignalR_Sample.WebApi.Domain;
+using SignalR_Sample.WebApi.Hubs;
 using SignalR_Sample.WebApi.Infrastructure.Repositories;
 using System.Reflection;
 
@@ -34,6 +36,7 @@ namespace SignalR_Sample.WebApi
 
             services.AddScoped<IPerson, PersonRepository>();
             services.AddScoped<IMessage, MessageRepository>();
+            services.AddScoped<IMessageHub, MessageHub>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
             return services;
